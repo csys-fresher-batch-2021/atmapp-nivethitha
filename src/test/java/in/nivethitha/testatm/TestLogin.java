@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import in.nivethitha.service.Login;
-import in.nivethitha.validator.NumberValidator;
 
 public class TestLogin {
 	@Test

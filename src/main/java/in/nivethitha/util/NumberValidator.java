@@ -1,29 +1,49 @@
-package in.nivethitha.validator;
+package in.nivethitha.util;
 
+/**
+ * @author nive2676
+ *
+ */
 public class NumberValidator {
-	public static boolean accountNumberValidation(String accountNumber)
-	{
-		String number=String.valueOf(accountNumber);
-		
-			if (number.length() != 10) {
-				do {
-					System.out.println("Invalid Account Number");
-				} while (number.length() == 10);
-			}
-			return false;
-	
+	/**
+	 * This method is for validating account Number
+	 * 
+	 * @param accountNumber
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean accountNumberValidation(long accountNumber) {
+		String number = String.valueOf(accountNumber);
 
+		if (number.length() != 10) {
+			do {
+				System.out.println("Invalid account number");
+			} while (number.length() == 10);
 		}
-	public static boolean pinNumberValidation(String pinNumber)
-	{
-		String pin=String.valueOf(pinNumber);
+
+		return false;
+	}
+
+	/**
+	 * This method is for validating pin Number
+	 * 
+	 * @param pin
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean pinNumberValidation(int pin) {
+		String pinNumber = String.valueOf(pin);
+
 		if (pinNumber.length() != 4) {
 			do {
-				System.out.println("Invalid Pin Number");
+
+				System.out.println("Invalid pin number");
+
 			} while (pinNumber.length() == 4);
 		}
+
 		return false;
-		
+
 	}
 
 }

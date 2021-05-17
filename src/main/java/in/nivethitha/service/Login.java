@@ -2,7 +2,6 @@ package in.nivethitha.service;
 
 import java.util.HashMap;
 
-
 import in.nivethitha.model.User;
 import in.nivethitha.util.*;
 
@@ -31,7 +30,7 @@ public class Login {
 	 * 
 	 * @param accountnumber
 	 * @param pin
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 
 	public static boolean isExist(Long accountNumber, int pin) {
