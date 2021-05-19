@@ -22,19 +22,26 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		out.println("Successful");
-		Long accountNumber = Long.parseLong(request.getParameter("accountNumber"));
-		int pin = Integer.parseInt(request.getParameter("pin"));
-		boolean valid;
 
-		valid = Login.isExist(accountNumber, pin);
+		try {
+			String accountNumber =request.getParameter("accountNumber");
+			String pin = request.getParameter("pin");
+			boolean valid = Login.isExist(accountNumber, pin);
 
-		if (valid) {
-			String message = "Welcome to ATM Services";
-			response.sendRedirect("Message.jsp?infoMessage=" + message);
+			if (valid) {
+				String message = "Welcome to ATM Services";
+				response.sendRedirect("Message.jsp?infoMessage=" + message);
 
-		} else {
-			String message = "Invalid Login Credentials";
-			response.sendRedirect("Login.jsp?errorMessage=" + message);
+			} else {
+				String message = "Invalid Login Credentials";
+				response.sendRedirect("Login.jsp?errorMessage=" + message);
+			}
+		} catch (RuntimeException e) {
+			
+			e.printStackTrace();
+			
+			response.sendRedirect("Login.jsp?errorMessage=" +e.getMessage());
+
 		}
 
 	}

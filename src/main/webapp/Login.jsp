@@ -17,7 +17,7 @@
 			<label>Enter Account Number</label> <input type="number"
 				name="accountNumber" id="accountNumber"
 				placeholder="Enter Account Number"> <br> <br> <label>Enter
-				Pin Number</label> <input type="number" name="pin" id="pin"
+				Pin Number</label> <input type="password" name="pin" id="pin"
 				placeholder="Enter pin here"> <br> <br>
 			<button type="submit">ENTER</button>
 
