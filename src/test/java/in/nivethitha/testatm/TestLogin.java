@@ -19,7 +19,6 @@ public class TestLogin {
 			assertTrue(exist);
 		} catch (Exception e) {
 			assertEquals("Welcome to ATM Services", e.getMessage());
-
 			e.printStackTrace();
 		}
 

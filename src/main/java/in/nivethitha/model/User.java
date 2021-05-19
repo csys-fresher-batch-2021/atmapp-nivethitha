@@ -1,8 +1,8 @@
 package in.nivethitha.model;
 
 public class User {
-	public long accountNumber;
-	public int pin;
+	public String accountNumber;
+	public String pin;
 	public double balance;
 
 }
