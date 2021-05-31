@@ -1,59 +1,33 @@
 package in.nivethitha.service;
 
-import java.util.HashMap;
-
+import java.util.List;
+import in.nivethitha.dao.UserDataDAO;
 import in.nivethitha.model.User;
-//import in.nivethitha.util.StringValidator;
-//import in.nivethitha.util.StringValidator;
-//import in.nivethitha.util.StringValidator;
-import in.nivethitha.validator.NumberValidator;
+import in.nivethitha.validator.AccountNumberValidator;
+import in.nivethitha.validator.PinNumberValidator;
 
 public class Login {
 	/**
 	 * This ArrayList is for adding user details
 	 */
-	public static HashMap<String, String> masterCredentials = new HashMap<String, String>();
+	public static String loginValidation(long accountNumber, int pin) {
+		AccountNumberValidator.isValidAccountNumber(accountNumber);
+		PinNumberValidator.isValidPinNumber(pin);
+		String userName = "";
+		UserDataDAO userDataDAO = new UserDataDAO();
+		List<User> masterCredentials = userDataDAO.loginCredentialData();
+		for (User user : masterCredentials) {
+			if (accountNumber == user.getAccountNumber() && user.getPin() == (pin)) {
+				userName = user.getAccountHolderName();
+				accountNumber = user.getAccountNumber();
+				break;
 
-	static {
-		User user1 = new User();
-		user1.accountNumber = "5976434678";
-		user1.pin = "1234";
-		masterCredentials.put(user1.accountNumber, user1.pin);
-		User user2 = new User();
-		user2.accountNumber = "8767645334";
-		user2.pin = "8899";
-		user2.balance = 4000;
-		masterCredentials.put(user2.accountNumber, user2.pin);
-
-	}
-
-	/**
-	 * This method is for checking whether the AccountNumber and Pin Number is exist
-	 * or not
-	 * 
-	 * @param accountnumber
-	 * @param pin
-	 * @throws Exception
-	 */
-
-	public static boolean isExist(String accountNumber, String pin) {
-		boolean exists = false;
-		NumberValidator.accountNumberValidation(accountNumber);
-		NumberValidator.pinNumberValidation(pin);
-		//StringValidator.isValidNumber(accountNumber);
-		//StringValidator.isValidPin(pin);
-		if (masterCredentials.containsKey((accountNumber))) {
-			if (masterCredentials.get(accountNumber).equals(pin)) {
-
-				exists = true;
 			} else {
-				throw new RuntimeException("Incorrect pin");
-
+				throw new RuntimeException("Incorrect account number or Pin number");
 			}
-		} else {
-			throw new RuntimeException("Account not found");
 		}
+		System.out.println("Welcome  " + userName);
+		return userName;
 
-		return exists;
 	}
 }
