@@ -1,20 +1,24 @@
 package in.nivethitha.validator;
 
+import in.nivethitha.exception.InvalidPinNumberFormatException;
+import in.nivethitha.exception.NegativePinNumberException;
+
 public class PinNumberValidator {
+	private PinNumberValidator() {
+		// Default constructor
+	}
 	/**
 	 * This method is for checking whether the number is positive or not    
 	 * @param pin
 	 * @return
 	 */
-	public static boolean isPositiveNumber(int pin) {
-		boolean isValid = false;
+	public static boolean isPositiveNumber(int pin)throws NegativePinNumberException {
 
 		if (pin < 0) {
-			isValid = false;
-			throw new RuntimeException("Pin number should not be negative");
+			throw new NegativePinNumberException("Pin number should not be negative");
 
 		}
-		return isValid;
+		return false;
 	}
 
 	/**
@@ -22,15 +26,13 @@ public class PinNumberValidator {
 	 * @param pin
 	 * @return
 	 */
-	public static boolean isValidPinNumberFormat(int pin) {
-		boolean isValid = false;
+	public static boolean isValidPinNumberFormat(int pin)throws InvalidPinNumberFormatException {
 		String pinNumber = Long.toString(pin);
 		String number = pinNumber.replaceAll("[^a-zA-Z0-9]", " ");
 		if (number.length() != 4) {
-			isValid = false;
-			throw new RuntimeException("Invalid pin number");
+			throw new InvalidPinNumberFormatException("Invalid pin number");
 		}
-		return isValid;
+		return false;
 
 	}
 
@@ -38,8 +40,10 @@ public class PinNumberValidator {
 	 * This method is for checking whether the pin number is valid or not
 	 * @param pin
 	 * @return
+	 * @throws NegativePinNumberException 
+	 * @throws InvalidPinNumberFormatException 
 	 */
-	public static boolean isValidPinNumber(int pin) {
+	public static boolean isValidPinNumber(int pin) throws NegativePinNumberException, InvalidPinNumberFormatException {
 		boolean isValid = false;
 		PinNumberValidator.isPositiveNumber(pin);
 		PinNumberValidator.isValidPinNumberFormat(pin);

@@ -1,23 +1,30 @@
 package in.nivethitha.util;
 
+import in.nivethitha.exception.EmptyMobileNumberException;
+import in.nivethitha.exception.InvalidMobileNumberException;
+import in.nivethitha.exception.InvalidMobileNumberLengthException;
+import in.nivethitha.exception.NegativeMobileNumberException;
+
 public class NumberValidator {
+	private NumberValidator() {
+		//Default Constructor
+	}
 	/**
 	 * This method is for mobile number should not be not null
 	 * @param mobileNumber
 	 * @return
 	 */
-	public static boolean isNotNull(long mobileNumber) {
+	public static boolean isNotNull(long mobileNumber)throws EmptyMobileNumberException {
 		String number = Long.toString(mobileNumber);
-		boolean isvalid = false;
-		if (number != null) {
+		if (number == null) {
+			throw new EmptyMobileNumberException("mobile number should not be empty");
 
-			isvalid = true;
-		} else {
-			throw new RuntimeException("mobile number should not be empty");
 		}
-		return isvalid;
+		return false; 
+		}
+		
 
-	}
+	
 
 	/**
 	 * This method is for mobile number should not contain negative values
@@ -25,37 +32,38 @@ public class NumberValidator {
 	 * @return
 	 */
 
-	public static boolean isPositiveNumber(long mobileNumber) {
-		boolean isvalid = false;
+	public static boolean isPositiveNumber(long mobileNumber)throws NegativeMobileNumberException {
+		
 		if (mobileNumber > 0) {
-			isvalid = true;
-		} else {
-			throw new RuntimeException("Mobile number should not be negative");
+		
+			throw new NegativeMobileNumberException("Mobile number should not be negative");
 
 		}
-		return isvalid;
+		return false; 
 
-	}
+		}
+		
+
+	
 
 	/**
 	 * This method is for checking mobile number length
 	 * @param mobileNumber
 	 * @return
 	 */
-	public static boolean isValidLength(long mobileNumber)
+	public static boolean isValidLength(long mobileNumber)throws InvalidMobileNumberLengthException
 
 	{
 		String number = Long.toString(mobileNumber);
-		boolean isvalid = false;
-		if (number.length() == 10) {
-			isvalid = true;
-		} else {
-			isvalid = false;
-			throw new RuntimeException("Invalid mobile number");
-		}
-		return isvalid;
+		if (number.length() != 10) {
+			throw new InvalidMobileNumberLengthException("Invalid mobile number");
 
-	}
+		}
+		return false; 
+		}
+		
+
+	
 
 	/**
 	 * This method is used to check whether the mobile number is valid or not
@@ -63,14 +71,14 @@ public class NumberValidator {
 	 * @return
 	 */
 
-	public static boolean isValidNumber(long mobileNumber) {
+	public static boolean isValidNumber(long mobileNumber)throws InvalidMobileNumberException {
 		try {
 			NumberValidator.isNotNull(mobileNumber);
 			NumberValidator.isPositiveNumber(mobileNumber);
 			NumberValidator.isValidLength(mobileNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Please check your mobile number");
+			throw new InvalidMobileNumberException("Please check your mobile number");
 		}
 		return false;
 
